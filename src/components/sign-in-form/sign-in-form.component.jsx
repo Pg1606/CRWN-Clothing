@@ -20,9 +20,8 @@ const SignInForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
 
-  const logGoogleUser = async () => {
-    const { user } = await signInWithGooglePopup();
-    await createUserDocumentFromAuth(user);
+  const signInWithGoogle = async () => {
+    await signInWithGooglePopup();
   };
 
   const resetFormFields = () => {
@@ -33,11 +32,11 @@ const SignInForm = () => {
     event.preventDefault();
 
     try {
-      const { user } = await signInAuthUserWithEmailAndPassword(
+      await signInAuthUserWithEmailAndPassword(
         email,
         password
       );
-      console.log(user);
+
       resetFormFields();
     } catch(error) {
       switch(error.code) {
@@ -46,6 +45,9 @@ const SignInForm = () => {
           break;
         case 'auth/user-not-found':
           alert('no user associated with this email');
+          break;
+        case 'auth/invalid-credential':
+          alert('Wrong Password entered.');
           break;
         default:
           console.log(error);
@@ -84,7 +86,7 @@ const SignInForm = () => {
         />
         <div className="buttons-container">
           <Button type="submit">Sign In</Button>
-          <Button type="button" buttonType='google' onClick={logGoogleUser}>
+          <Button type="button" buttonType='google' onClick={signInWithGoogle}>
             GOOGLE SIGN IN
           </Button>
         </div>
