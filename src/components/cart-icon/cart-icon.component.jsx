@@ -16,8 +16,8 @@ const CartIcon = () => {
   const toogleIsCartOpen = () => setIsCartOpen(!isCartOpen);
 
   return (
-    <div className='cart-icon-container'>
-      <ShoppingIcon className='shopping-icon' onClick={toogleIsCartOpen} />
+    <div className='cart-icon-container' onClick={toogleIsCartOpen}>
+      <ShoppingIcon className='shopping-icon' />
       <span className='item-count'>{cartCount}</span>
     </div>
   );
