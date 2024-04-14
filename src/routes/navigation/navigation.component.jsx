@@ -1,5 +1,5 @@
 import { Fragment, useContext } from "react";
-import { Outlet, Link } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 
 import CartIcon from "../../components/cart-icon/cart-icon.component";
 import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component";
@@ -10,7 +10,7 @@ import { CartContext } from "../../contexts/cart.context";
 
 import { signOutUser } from "../../utils/firebase/firebase.utils";
 
-import './navigation.styles.scss';
+import {NavigationContainer, NavLinks, NavLink, LogoContainer} from './navigation.styles';
 //Fragment renders to nothing when react mounts the component its just the component when u need a parent if any component. It also doesn't show in console HTML.
 
 //Link is just like a anchor tag which helps to navigate to that link but this Link helps with diff browser.
@@ -20,27 +20,27 @@ const Navigation = () => {
   //console.log(currentUser);
   return (
     <Fragment>
-      <div className="navigation">
-        <Link className="logo-container" to="/">
+      <NavigationContainer>
+        <LogoContainer to="/">
           <CrwnLogo className="logo" />
-        </Link>
-        <div className="nav-links-container">
-          <Link className="nav-link" to="/shop">
+        </LogoContainer>
+        <NavLinks>
+          <NavLink to="/shop">
             SHOP
-          </Link>
+          </NavLink>
           {currentUser ? (
-            <span className="nav-link" onClick={signOutUser}>
+            <NavLink as='span' onClick={signOutUser}>
               SIGN OUT
-            </span>
+            </NavLink>
           ) : (
-            <Link className="nav-link" to="/auth">
+            <NavLink to="/auth">
               SIGN IN
-            </Link>
+            </NavLink>
           )}
           <CartIcon />
-        </div>
+        </NavLinks>
         {isCartOpen && <CartDropdown />}
-      </div>
+      </NavigationContainer>
       <Outlet />
     </Fragment>
   );

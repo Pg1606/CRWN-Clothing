@@ -8,7 +8,7 @@ import {
   createUserDocumentFromAuth
 } from "../../utils/firebase/firebase.utils";
 
-import './sign-up-form.styles.scss';
+import {SignupContainer} from './sign-up-form.styles';
 
 const defaultFormFields = {
   displayName: '',
@@ -57,7 +57,7 @@ const SignUpForm = () => {
   };//this is to check the prev state of the fields u can imagine formfeilds as prevState
 
   return (
-    <div className="sign-up-container">
+    <SignupContainer>
       <h2>Don't have an Account?</h2>
       <span>Sign up with your email and password</span>
       <form onSubmit={handleSubmit}>
@@ -98,7 +98,7 @@ const SignUpForm = () => {
         />
         <Button type="submit">Sign Up</Button>
       </form>
-    </div>
+    </SignupContainer>
   );
 };
 
