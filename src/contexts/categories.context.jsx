@@ -1,3 +1,8 @@
+/////////////////////NOT REQUIRED ANYMORE////////////
+
+
+
+
 import { createContext, useState, useEffect } from "react";
 
 //import { addCollectionAndDocuments } from "../utils/firebase/firebase.utils.js";
