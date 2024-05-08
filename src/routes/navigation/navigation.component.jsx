@@ -11,7 +11,7 @@ import { ReactComponent as CrwnLogo } from "../../assests/crown.svg";
 import { selectIsCartOpen } from '../../store/cart/cart.selector';
 import { selectCurrentUser } from "../../store/user/user.selector";
 
-import { signOutUser } from "../../utils/firebase/firebase.utils";
+// import { signOutUser } from "../../utils/firebase/firebase.utils";
 
 import { signOutStart } from "../../store/user/user.action";
 
