@@ -1,15 +1,17 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 
 import FormInput from "../form-input/form-input.component";
 import Button, {BUTTON_TYPE_CLASSES} from "../button/button.component";
 
-import {
-  signInWithGooglePopup,
-  //createUserDocumentFromAuth,
-  signInAuthUserWithEmailAndPassword
-} from "../../utils/firebase/firebase.utils";
+// import {
+//   signInWithGooglePopup,
+//   createUserDocumentFromAuth,
+//   signInAuthUserWithEmailAndPassword
+// } from "../../utils/firebase/firebase.utils";
 
 import {SigninContainer, ButtonsContainer} from './sign-in-form.styles';
+import { googleSignInStart, emailSignInStart } from "../../store/user/user.action";
 
 const defaultFormFields = {
   email: '',
@@ -17,11 +19,13 @@ const defaultFormFields = {
 }
 
 const SignInForm = () => {
+  const dispatch = useDispatch()
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
 
   const signInWithGoogle = async () => {
-    await signInWithGooglePopup();
+    //await signInWithGooglePopup();
+    dispatch(googleSignInStart());
   };
 
   const resetFormFields = () => {
@@ -32,11 +36,11 @@ const SignInForm = () => {
     event.preventDefault();
 
     try {
-      await signInAuthUserWithEmailAndPassword(
-        email,
-        password
-      );
-
+      // await signInAuthUserWithEmailAndPassword(
+      //   email,
+      //   password
+      // );
+      dispatch(emailSignInStart(email, password));
       resetFormFields();
     } catch(error) {
       switch(error.code) {
@@ -70,9 +74,8 @@ const SignInForm = () => {
         <FormInput
           label="Email"
           type="email"
-          required
+          required name="email"
           onChange={handleChange}
-          name="email"
           value={email}
         />
 
@@ -81,8 +84,9 @@ const SignInForm = () => {
           type="password"
           required
           onChange={handleChange}
-          name="password"
           value={password}
+          name="password"
+          autoComplete="true"
         />
         <ButtonsContainer>
           <Button type="submit">Sign In</Button>

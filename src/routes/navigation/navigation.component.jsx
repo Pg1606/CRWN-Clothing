@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 import { Outlet } from "react-router-dom";
-import { useSelector } from "react-redux"; 
+import { useSelector, useDispatch } from "react-redux"; 
 
 import CartIcon from "../../components/cart-icon/cart-icon.component";
 import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component";
@@ -13,6 +13,8 @@ import { selectCurrentUser } from "../../store/user/user.selector";
 
 import { signOutUser } from "../../utils/firebase/firebase.utils";
 
+import { signOutStart } from "../../store/user/user.action";
+
 import {NavigationContainer, NavLinks, NavLink, LogoContainer} from './navigation.styles';
 //Fragment renders to nothing when react mounts the component its just the component when u need a parent if any component. It also doesn't show in console HTML.
 
@@ -23,6 +25,10 @@ const Navigation = () => {
   //const { isCartOpen } = useContext(CartContext);
   const isCartOpen = useSelector(selectIsCartOpen);
   //console.log(currentUser);
+  const dispatch = useDispatch();
+  
+  const signOutUser = () => dispatch(signOutStart());
+
   return (
     <Fragment>
       <NavigationContainer>
