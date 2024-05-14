@@ -21,7 +21,7 @@ const Shop = () => {
 
     // getCategoriesMap();
     dispatch(fetchCategoriesStart());
-  }, []);
+  }, [dispatch]);
 
   return (
     <Routes>

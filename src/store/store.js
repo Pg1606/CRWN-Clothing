@@ -37,8 +37,7 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 //const middleWares = [logger];//[loggerMiddleware]
 const middleWares = [
-  process.env.NODE_ENV !== 'production' && logger,
-  sagaMiddleware
+  process.env.NODE_ENV !== 'production' && logger, sagaMiddleware
 //thunk
 ].filter(Boolean); //'production', 'development'
 
