@@ -7,8 +7,6 @@ import Navigation from "./routes/navigation/navigation.component.jsx";
 import Authentication from "./routes/authentication/authentication.component";
 import Shop from "./routes/shop/shop.component.jsx";
 import Checkout from "./routes/checkout/checkout.component.jsx";
-import Success from "./components/payment/success.jsx";
-import Cancel from "./components/payment/cancel.jsx";
 import { checkUserSession } from "./store/user/user.action.js";
 // import {
 //   onAuthStateChangedListener,
@@ -41,8 +39,6 @@ const App = () => {
         <Route path="shop/*" element={<Shop />} />
         <Route path="auth" element={<Authentication />} />
         <Route path="checkout" element={<Checkout />} />
-        <Route path="/success" element={<Success />} />
-        <Route path="/cancel" element={<Cancel />} />
       </Route>
     </Routes>
   );
