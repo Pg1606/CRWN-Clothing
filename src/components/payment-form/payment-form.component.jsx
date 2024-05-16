@@ -13,7 +13,7 @@ const PaymentForm = () => {
   const quantity = useSelector(selectCartCount);
 
   const paymentHandler = () => {
-      fetch("/api/stripe", {
+      fetch("/.netlify/functions/stripe", {
       method: "POST",
       body: JSON.stringify({amount: amount * 100, quantity: quantity})
       })
