@@ -1,21 +1,21 @@
 import { loadStripe } from "@stripe/stripe-js";
 
-import { PaymentFormContainer } from './payment-form.styles';
+import { PaymentFormContainer, PaymentButton } from './payment-form.styles';
 import { useSelector } from "react-redux";
-import { selectCartTotal, selectCartCount } from "../../store/cart/cart.selector";
+import { selectCartItems } from "../../store/cart/cart.selector";
 
 var stripe = await loadStripe(
   "pk_test_51PFy2gSDGZWWYY6XG8K8EneS97Y5WFDGAK6yeXFzH4s4KsMqgen3yLenj6IXLlkIu0kIPFZexpfEf8MT3YXvhO8a00NoDdAXbh"
 );
 
 const PaymentForm = () => {
-  const amount = useSelector(selectCartTotal);
-  const quantity = useSelector(selectCartCount);
+  //const amount = useSelector(selectCartTotal);
+  const cartItems = useSelector(selectCartItems);
 
   const paymentHandler = () => {
       fetch("/.netlify/functions/stripe", {
       method: "POST",
-      body: JSON.stringify({amount: amount * 100, quantity: quantity})
+      body: JSON.stringify({cartItems})
       })
       .then(function (response) {
         return response.json();
@@ -35,8 +35,8 @@ const PaymentForm = () => {
 
   return (
     <PaymentFormContainer>
-      <h2>Credit Card Payment: </h2> 
-        <button onClick={paymentHandler}>Pay Now @ 4000003560000008</button>
+      <h2>Credit Card Payment</h2> 
+      <PaymentButton onClick={paymentHandler}>Pay Now</PaymentButton>
     </PaymentFormContainer>
   )
 }
