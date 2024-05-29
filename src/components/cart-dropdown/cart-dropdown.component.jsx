@@ -1,3 +1,5 @@
+import { useCallback } from 'react';
+
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
@@ -14,9 +16,9 @@ const CartDropdown = () => {
   const cartItems = useSelector(selectCartItems);
   const navigate = useNavigate();
 
-  const checkoutPageHandler = () => {
+  const checkoutPageHandler = useCallback(() => {
     navigate("/checkout");
-  };
+  }, []);//useCallback is memoizing the function so that untill the dependency array changes it is not going to re-initialise the function again and again
 
   return (
     <CartDropdownContainer>
